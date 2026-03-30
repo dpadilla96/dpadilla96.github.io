@@ -1,1 +1,626 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diana Padilla — QA Engineer</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --rose: #e8847a;
+      --rose-light: #f2b5af;
+      --rose-pale: #fdf0ee;
+      --dark: #1a1a1a;
+      --mid: #4a4a4a;
+      --soft: #8a8a8a;
+      --white: #ffffff;
+      --cream: #fdf8f6;
+      --border: #f0e0dc;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--dark);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 4rem;
+      background: rgba(253,248,246,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.3rem;
+      color: var(--rose);
+      letter-spacing: -0.5px;
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--mid);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--rose); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 8rem 4rem 4rem;
+      gap: 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -20%; right: -10%;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(232,132,122,0.12) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .hero-text { position: relative; z-index: 1; }
+    .hero-tag {
+      display: inline-block;
+      background: var(--rose-pale);
+      color: var(--rose);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.4rem 1rem;
+      border-radius: 2rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid var(--rose-light);
+      animation: fadeUp 0.6s ease both;
+    }
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.8rem, 5vw, 4.2rem);
+      line-height: 1.1;
+      color: var(--dark);
+      margin-bottom: 1.2rem;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--rose);
+    }
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--mid);
+      line-height: 1.7;
+      max-width: 480px;
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+    .hero-cta {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+    .btn-primary {
+      background: var(--rose);
+      color: white;
+      padding: 0.85rem 2rem;
+      border-radius: 3rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+      letter-spacing: 0.02em;
+    }
+    .btn-primary:hover { background: #d4706a; transform: translateY(-2px); }
+    .btn-outline {
+      border: 1.5px solid var(--rose-light);
+      color: var(--rose);
+      padding: 0.85rem 2rem;
+      border-radius: 3rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-outline:hover { background: var(--rose-pale); transform: translateY(-2px); }
+
+    .hero-visual {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      animation: fadeUp 0.6s 0.4s ease both;
+    }
+    .skills-float {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 1.2rem;
+      padding: 1.5rem 2rem;
+      box-shadow: 0 8px 32px rgba(232,132,122,0.08);
+    }
+    .skills-float h3 {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: 1rem;
+    }
+    .skill-tags {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+    }
+    .skill-tag {
+      background: var(--rose-pale);
+      color: var(--mid);
+      font-size: 0.82rem;
+      padding: 0.3rem 0.9rem;
+      border-radius: 2rem;
+      font-weight: 500;
+      border: 1px solid var(--border);
+    }
+    .stat-row {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+    }
+    .stat-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 1.2rem;
+      text-align: center;
+      box-shadow: 0 4px 16px rgba(232,132,122,0.06);
+    }
+    .stat-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.8rem;
+      color: var(--rose);
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--soft);
+      font-weight: 500;
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 6rem 4rem; }
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: 0.8rem;
+    }
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      color: var(--dark);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    .section-title em { font-style: italic; color: var(--rose); }
+    .section-desc {
+      font-size: 1rem;
+      color: var(--mid);
+      line-height: 1.7;
+      max-width: 600px;
+      font-weight: 300;
+      margin-bottom: 3rem;
+    }
+
+    /* ── SOBRE MÍ ── */
+    .about { background: white; }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .about-text p {
+      font-size: 1rem;
+      color: var(--mid);
+      line-height: 1.8;
+      font-weight: 300;
+      margin-bottom: 1.2rem;
+    }
+    .about-text p strong { color: var(--dark); font-weight: 600; }
+    .about-highlights { display: flex; flex-direction: column; gap: 1rem; }
+    .highlight-card {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--rose);
+      border-radius: 0.8rem;
+      padding: 1.2rem 1.5rem;
+    }
+    .highlight-card h4 {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 0.3rem;
+    }
+    .highlight-card p {
+      font-size: 0.82rem;
+      color: var(--soft);
+      line-height: 1.5;
+    }
+
+    /* ── PROYECTOS ── */
+    .projects { background: var(--cream); }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .project-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 1.5rem;
+      padding: 2rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--rose), var(--rose-light));
+    }
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(232,132,122,0.12);
+    }
+    .project-sprint {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: 0.6rem;
+    }
+    .project-card h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.3rem;
+      color: var(--dark);
+      margin-bottom: 0.8rem;
+      line-height: 1.3;
+    }
+    .project-context {
+      font-size: 0.85rem;
+      color: var(--soft);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.3rem;
+      margin-top: 1rem;
+    }
+    .project-card p {
+      font-size: 0.9rem;
+      color: var(--mid);
+      line-height: 1.6;
+      font-weight: 300;
+      margin-bottom: 1rem;
+    }
+    .project-tools {
+      display: flex; flex-wrap: wrap; gap: 0.4rem;
+      margin-top: 1.2rem;
+    }
+    .tool-tag {
+      background: var(--rose-pale);
+      color: var(--rose);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.25rem 0.7rem;
+      border-radius: 2rem;
+      border: 1px solid var(--rose-light);
+    }
+
+    /* ── CONTACTO ── */
+    .contact {
+      background: var(--dark);
+      text-align: center;
+    }
+    .contact .section-label { color: var(--rose-light); }
+    .contact .section-title { color: white; }
+    .contact .section-desc { color: rgba(255,255,255,0.5); margin: 0 auto 2.5rem; }
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: white;
+      text-decoration: none;
+      padding: 0.9rem 1.8rem;
+      border-radius: 3rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    .contact-link:hover {
+      background: var(--rose);
+      border-color: var(--rose);
+      transform: translateY(-2px);
+    }
+    .contact-link svg { width: 18px; height: 18px; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.25);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; gap: 2rem; }
+      .hero::before { display: none; }
+      section { padding: 4rem 1.5rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .stat-row { grid-template-columns: repeat(3,1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Diana Padilla</div>
+  <ul class="nav-links">
+    <li><a href="#sobre-mi">Sobre mí</a></li>
+    <li><a href="#proyectos">Proyectos</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <span class="hero-tag">🌸 Open to Work — QA Engineer</span>
+    <h1>Hola, soy<br><em>Diana Padilla</em></h1>
+    <p class="hero-sub">
+      QA Engineer en formación con más de 8 años de experiencia en TI y Contabilidad.
+      Me apasiona encontrar bugs antes de que lleguen al usuario final.
+    </p>
+    <div class="hero-cta">
+      <a href="#proyectos" class="btn-primary">Ver mis proyectos</a>
+      <a href="#contacto" class="btn-outline">Contáctame</a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="skills-float">
+      <h3>Stack de herramientas</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">JIRA</span>
+        <span class="skill-tag">Postman</span>
+        <span class="skill-tag">Git / GitHub</span>
+        <span class="skill-tag">Chrome DevTools</span>
+        <span class="skill-tag">API Testing</span>
+        <span class="skill-tag">Manual Testing</span>
+        <span class="skill-tag">Bug Reporting</span>
+        <span class="skill-tag">Test Cases</span>
+      </div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-card">
+        <div class="stat-num">8+</div>
+        <div class="stat-label">Años en TI</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">4</div>
+        <div class="stat-label">Sprints QA</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">16</div>
+        <div class="stat-label">Estudiantes PC Rosa</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE MÍ -->
+<section class="about" id="sobre-mi">
+  <div class="about-grid">
+    <div class="about-text">
+      <div class="section-label">Sobre mí</div>
+      <h2 class="section-title">Una historia<br><em>poco convencional</em></h2>
+      <p>
+        Mi camino hacia la tecnología no fue en línea recta — y eso es lo que más valor me ha dado.
+        Durante más de <strong>8 años</strong> trabajé simultáneamente como Auxiliar Contable y
+        Encargada de Soporte de TI en una cooperativa, gestionando infraestructura tecnológica para
+        <strong>50 empleados en 4 departamentos</strong>.
+      </p>
+      <p>
+        Esa dualidad me enseñó algo que pocos QA traen al equipo: entender el negocio desde adentro
+        y la tecnología que lo sostiene. Hoy me especializo en <strong>QA Engineering</strong> a
+        través del bootcamp de TripleTen, completando proyectos prácticos en pruebas manuales,
+        diseño de casos de prueba y pruebas de API.
+      </p>
+      <p>
+        También soy fundadora de <strong>Proyecto PC Rosa 🌸</strong>, una iniciativa social donde
+        imparto talleres de cómputo para niños y adultos en San Juan de los Lagos — porque creo que
+        la tecnología debe ser accesible para todos.
+      </p>
+    </div>
+    <div class="about-highlights">
+      <div class="highlight-card">
+        <h4>🎓 Formación</h4>
+        <p>QA Engineering — TripleTen Bootcamp (2026)<br>
+        Lic. Tecnologías de la Información — UDG<br>
+        Google IT Support Certificate<br>
+        Google AI Fundamentals Certificate</p>
+      </div>
+      <div class="highlight-card">
+        <h4>💼 Experiencia actual</h4>
+        <p>Encargada de Soporte de TI — UCCA (2024 - Actual)<br>
+        Auxiliar Contable — UCCA (2018 - Actual)</p>
+      </div>
+      <div class="highlight-card">
+        <h4>🌐 Idiomas</h4>
+        <p>Español — Nativo<br>English — Professional Working</p>
+      </div>
+      <div class="highlight-card">
+        <h4>📍 Ubicación</h4>
+        <p>San Juan de los Lagos, Jalisco, México<br>Disponible para trabajo remoto</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROYECTOS -->
+<section class="projects" id="proyectos">
+  <div style="max-width:1100px; margin:0 auto;">
+    <div class="section-label">Proyectos</div>
+    <h2 class="section-title">Mis proyectos<br><em>de QA</em></h2>
+    <p class="section-desc">
+      Proyectos desarrollados durante el bootcamp de QA Engineering en TripleTen,
+      aplicando técnicas reales de aseguramiento de calidad.
+    </p>
+    <div class="projects-grid">
+
+      <!-- Sprint 1 -->
+      <div class="project-card">
+        <div class="project-sprint">Sprint 1 · TripleTen 2026</div>
+        <h3>Introducción a QA Engineering</h3>
+        <div class="project-context">Contexto</div>
+        <p>Primer acercamiento a las pruebas manuales de software, aprendiendo a identificar errores en nuevas funcionalidades y cambios de sistema.</p>
+        <div class="project-context">Análisis</div>
+        <p>Realicé pruebas de humo y regresión para verificar que los nuevos cambios no introdujeran errores en funcionalidades existentes. Documenté cada defecto encontrado con pasos de reproducción claros.</p>
+        <div class="project-context">Conclusiones</div>
+        <p>Las pruebas de regresión son esenciales para mantener la estabilidad del software. Un buen reporte de bug acelera significativamente la corrección por parte del equipo de desarrollo.</p>
+        <div class="project-tools">
+          <span class="tool-tag">Pruebas manuales</span>
+          <span class="tool-tag">Smoke Testing</span>
+          <span class="tool-tag">Regression Testing</span>
+          <span class="tool-tag">Bug Reporting</span>
+        </div>
+      </div>
+
+      <!-- Sprint 2 -->
+      <div class="project-card">
+        <div class="project-sprint">Sprint 2 · TripleTen 2026</div>
+        <h3>Diseño de Pruebas</h3>
+        <div class="project-context">Contexto</div>
+        <p>Diseño de pruebas para un servicio que genera rutas para distintos tipos de transporte, analizando requisitos y creando casos de prueba estructurados.</p>
+        <div class="project-context">Análisis</div>
+        <p>Analicé los requisitos funcionales del servicio e identifiqué escenarios críticos usando técnicas de partición de equivalencia. Creé listas de comprobación y casos de prueba cubriendo flujos positivos y negativos.</p>
+        <div class="project-context">Conclusiones</div>
+        <p>Un buen análisis de requisitos antes de probar ahorra tiempo y reduce errores. La cobertura de casos límite es tan importante como los flujos principales.</p>
+        <div class="project-tools">
+          <span class="tool-tag">Análisis de requisitos</span>
+          <span class="tool-tag">Test Case Design</span>
+          <span class="tool-tag">Checklists</span>
+        </div>
+      </div>
+
+      <!-- Sprint 3 -->
+      <div class="project-card">
+        <div class="project-sprint">Sprint 3 · TripleTen 2026</div>
+        <h3>Pruebas de Aplicaciones Web</h3>
+        <div class="project-context">Contexto</div>
+        <p>Pruebas completas de una aplicación web: preparación de documentación, ejecución de tests y reporte de bugs en un entorno real de QA.</p>
+        <div class="project-context">Análisis</div>
+        <p>Ejecuté pruebas de UI identificando defectos visuales y funcionales. Usé JIRA para el seguimiento completo del ciclo de vida de cada bug, desde su detección hasta el cierre.</p>
+        <div class="project-context">Conclusiones</div>
+        <p>El seguimiento estructurado de bugs con herramientas como JIRA mejora la comunicación entre QA y desarrollo, reduciendo el tiempo de resolución de incidencias.</p>
+        <div class="project-tools">
+          <span class="tool-tag">UI Testing</span>
+          <span class="tool-tag">JIRA</span>
+          <span class="tool-tag">Chrome DevTools</span>
+          <span class="tool-tag">Bug Tracking</span>
+        </div>
+      </div>
+
+      <!-- Sprint 4 -->
+      <div class="project-card">
+        <div class="project-sprint">Sprint 4 · TripleTen 2026</div>
+        <h3>Pruebas de API</h3>
+        <div class="project-context">Contexto</div>
+        <p>Pruebas manuales de API REST, verificando que cada endpoint respondiera correctamente e identificando comportamientos inesperados en las solicitudes HTTP.</p>
+        <div class="project-context">Análisis</div>
+        <p>Usé Postman para ejecutar solicitudes GET, POST, PUT y DELETE, validando códigos de respuesta, estructura del JSON y manejo de errores. Inspeccioné el tráfico HTTP con herramientas de red del navegador.</p>
+        <div class="project-context">Conclusiones</div>
+        <p>Las pruebas de API permiten detectar errores de integración antes de que afecten la interfaz de usuario. Validar tanto casos exitosos como errores es fundamental para una cobertura completa.</p>
+        <div class="project-tools">
+          <span class="tool-tag">Postman</span>
+          <span class="tool-tag">API Testing</span>
+          <span class="tool-tag">HTTP Requests</span>
+          <span class="tool-tag">ApiDoc</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section class="contact" id="contacto">
+  <div class="section-label">Contacto</div>
+  <h2 class="section-title">¿Platicamos? 🌸</h2>
+  <p class="section-desc">
+    Estoy en búsqueda activa de mi primera oportunidad como QA Engineer.
+    Si tienes un rol o quieres conectar, ¡escríbeme!
+  </p>
+  <div class="contact-links">
+    <a href="mailto:dianapadilla1996@gmail.com" class="contact-link">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+      dianapadilla1996@gmail.com
+    </a>
+    <a href="https://linkedin.com/in/diana-padilla-915273232" target="_blank" class="contact-link">
+      <svg fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+      LinkedIn
+    </a>
+    <a href="https://github.com/dpadilla96" target="_blank" class="contact-link">
+      <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+      GitHub
+    </a>
+  </div>
+</section>
+
+<footer>
+  © 2026 Diana Padilla Zamora · Hecho con 🌸 en San Juan de los Lagos, Jalisco
+</footer>
+
+</body>
+</html>
 
